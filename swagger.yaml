@@ -1,0 +1,2414 @@
+openapi: "3.0.0"
+info:
+  version: 0.0.1
+  title: BioTrack API
+  license:
+    name: MIT
+servers:
+  - url: https://mcmonitoring.agr.illinois.gov/serverjson.asp
+paths:
+  /:
+    post:
+      summary: All actions
+      description: This is the only endpoint provided. The type of action is differentiated by the action property in the POST body.
+      operationId: allActions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/LoginRequest"
+                - $ref: "#/components/schemas/User_AddRequest"
+                - $ref: "#/components/schemas/User_ModifyRequest"
+                - $ref: "#/components/schemas/User_RemoveRequest"
+                - $ref: "#/components/schemas/Employee_AddRequest"
+                - $ref: "#/components/schemas/Employee_ModifyRequest"
+                - $ref: "#/components/schemas/Employee_RemoveRequest"
+                - $ref: "#/components/schemas/Vehicle_AddRequest"
+                - $ref: "#/components/schemas/Vehicle_RemoveRequest"
+                - $ref: "#/components/schemas/Plant_Room_AddRequest"
+                - $ref: "#/components/schemas/Plant_Room_RemoveRequest"
+                - $ref: "#/components/schemas/Inventory_Room_AddRequest"
+                - $ref: "#/components/schemas/Inventory_Room_RemoveRequest"
+                - $ref: "#/components/schemas/Plant_NewRequest"
+                - $ref: "#/components/schemas/Plant_New_UndoRequest"
+                - $ref: "#/components/schemas/Plant_MoveRequest"
+                - $ref: "#/components/schemas/Plant_NewRequest"
+                - $ref: "#/components/schemas/Plant_Destroy_ScheduleRequest"
+                - $ref: "#/components/schemas/Plant_Destroy_Schedule_UndoRequest"
+                - $ref: "#/components/schemas/Plant_DestroyRequest"
+                - $ref: "#/components/schemas/Plant_Harvest_ScheduleRequest"
+                - $ref: "#/components/schemas/Plant_Harvest_Schedule_UndoRequest"
+                - $ref: "#/components/schemas/Plant_HarvestRequest"
+                - $ref: "#/components/schemas/Plant_Waste_WeighRequest"
+                - $ref: "#/components/schemas/Plant_CureRequest"
+                - $ref: "#/components/schemas/Plant_Convert_To_InventoryRequest"
+                - $ref: "#/components/schemas/Plant_Yield_ModifyRequest"
+                - $ref: "#/components/schemas/Plant_ModifyRequest"
+                - $ref: "#/components/schemas/Inventory_AdjustRequest"
+                - $ref: "#/components/schemas/Inventory_Adjust_UsableRequest"
+                - $ref: "#/components/schemas/Inventory_Destroy_ScheduleRequest"
+                - $ref: "#/components/schemas/Inventory_DestroyRequest"
+                - $ref: "#/components/schemas/Inventory_MoveRequest"
+                - $ref: "#/components/schemas/Inventory_CheckRequest"
+                - $ref: "#/components/schemas/Inventory_NewRequest"
+                - $ref: "#/components/schemas/Inventory_ManifestRequest"
+                - $ref: "#/components/schemas/Inventory_Manifest_PickupRequest"
+                - $ref: "#/components/schemas/Inventory_Manifest_LookupRequest"
+                - $ref: "#/components/schemas/Inventory_Manifest_ModifyRequest"
+                - $ref: "#/components/schemas/Inventory_Manifest_VoidRequest"
+                - $ref: "#/components/schemas/Inventory_Manifest_Void_StopRequest"
+                - $ref: "#/components/schemas/Inventory_Manifest_Void_ItemsRequest"
+                - $ref: "#/components/schemas/Inventory_Transfer_LookupRequest"
+                - $ref: "#/components/schemas/Inventory_Transfer_OutboundRequest"
+                - $ref: "#/components/schemas/Inventory_Transfer_Outbound_Return_LookupRequest"
+                - $ref: "#/components/schemas/Inventory_Transfer_Outbound_ReturnRequest"
+                - $ref: "#/components/schemas/Inventory_Transfer_Outbound_ModifyRequest"
+                - $ref: "#/components/schemas/Inventory_Transfer_Outbound_VoidRequest"
+                - $ref: "#/components/schemas/Inventory_Transfer_InboundRequest"
+                - $ref: "#/components/schemas/Inventory_Transfer_Inbound_ModifyRequest"
+                - $ref: "#/components/schemas/Inventory_Create_LotRequest"
+                - $ref: "#/components/schemas/Inventory_SplitRequest"
+                - $ref: "#/components/schemas/Inventory_ConvertRequest"
+                - $ref: "#/components/schemas/Inventory_SampleRequest"
+                - $ref: "#/components/schemas/Inventory_Qa_SampleRequest"
+                - $ref: "#/components/schemas/Inventory_Qa_Sample_VoidRequest"
+                - $ref: "#/components/schemas/Inventory_Qa_Sample_ResultsRequest"
+                - $ref: "#/components/schemas/Inventory_Qa_CheckRequest"
+                - $ref: "#/components/schemas/Inventory_Qa_Check_AllRequest"
+                - $ref: "#/components/schemas/Inventory_ModifyRequest"
+                - $ref: "#/components/schemas/Inventory_Convert_UndoRequest"
+                - $ref: "#/components/schemas/Card_LookupRequest"
+                - $ref: "#/components/schemas/Sale_DispenseRequest"
+                - $ref: "#/components/schemas/Sale_VoidRequest"
+                - $ref: "#/components/schemas/Sale_ModifyRequest"
+                - $ref: "#/components/schemas/Sale_RefundRequest"
+                - $ref: "#/components/schemas/Tax_Obligation_FileRequest"
+                - $ref: "#/components/schemas/Nonce_ReplayRequest"
+                - $ref: "#/components/schemas/Sync_CheckRequest"
+                - $ref: "#/components/schemas/Sync_VehicleRequest"
+                - $ref: "#/components/schemas/Sync_EmployeeRequest"
+                - $ref: "#/components/schemas/Sync_Plant_RoomRequest"
+                - $ref: "#/components/schemas/Sync_Inventory_RoomRequest"
+                - $ref: "#/components/schemas/Sync_Inventory_RoomRequestResponse"
+                - $ref: "#/components/schemas/Sync_InventoryRequest"
+                - $ref: "#/components/schemas/Sync_PlantRequest"
+                - $ref: "#/components/schemas/Sync_Plant_DerivativeRequest"
+                - $ref: "#/components/schemas/Sync_ManifestRequest"
+                # we got this far today (10/16)
+      responses:
+        '200':
+          description: Successful response objects.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/LoginResponse"
+                  - $ref: "#/components/schemas/User_AddResponse"
+                  - $ref: "#/components/schemas/User_ModifyResponse"
+                  - $ref: "#/components/schemas/User_RemoveResponse"
+                  - $ref: "#/components/schemas/Employee_AddResponse"
+                  - $ref: "#/components/schemas/Employee_ModifyResponse"
+                  - $ref: "#/components/schemas/Employee_RemoveResponse"
+                  - $ref: "#/components/schemas/Vehicle_AddResponse"
+                  - $ref: "#/components/schemas/Vehicle_RemoveResponse"
+                  - $ref: "#/components/schemas/Plant_Room_AddResponse"
+                  - $ref: "#/components/schemas/Plant_Room_RemoveResponse"
+                  - $ref: "#/components/schemas/Inventory_Room_AddResponse"
+                  - $ref: "#/components/schemas/Inventory_Room_RemoveResponse"
+                  - $ref: "#/components/schemas/Plant_NewResponse"
+                  - $ref: "#/components/schemas/Plant_New_UndoResponse"
+                  - $ref: "#/components/schemas/Plant_MoveResponse"
+                  - $ref: "#/components/schemas/Plant_Destroy_ScheduleNewResponse"
+                  - $ref: "#/components/schemas/Plant_Destroy_Schedule_UndoResponse"
+                  - $ref: "#/components/schemas/Plant_DestroyResponse"
+                  - $ref: "#/components/schemas/Plant_Harvest_ScheduleResponse"
+                  - $ref: "#/components/schemas/Plant_HarvestSchedule_UndoResponse"
+                  - $ref: "#/components/schemas/Plant_HarvestResponse"
+                  - $ref: "#/components/schemas/Plant_Waste_WeighResponse"
+                  - $ref: "#/components/schemas/Plant_CureResponse"
+                  - $ref: "#/components/schemas/Plant_Convert_To_InventoryResponse"
+                  - $ref: "#/components/schemas/Plant_Yield_ModifyResponse"
+                  - $ref: "#/components/schemas/Plant_ModifyResponse"
+                  - $ref: "#/components/schemas/Inventory_AdjustResponse"
+                  - $ref: "#/components/schemas/Inventory_Adjust_UsableResponse"
+                  - $ref: "#/components/schemas/Inventory_Destroy_ScheduleResponse"
+                  - $ref: "#/components/schemas/Inventory_DestroyResponse"
+                  - $ref: "#/components/schemas/Inventory_MoveResponse"
+                  - $ref: "#/components/schemas/Inventory_CheckResponse"
+                  - $ref: "#/components/schemas/Inventory_NewResponse"
+                  - $ref: "#/components/schemas/Inventory_ManifestResponse"
+                  - $ref: "#/components/schemas/Inventory_Manifest_PickupResponse"
+                  - $ref: "#/components/schemas/Inventory_Manifest_LookupResponse"
+                  - $ref: "#/components/schemas/Inventory_Manifest_ModifyResponse"
+                  - $ref: "#/components/schemas/Inventory_Manifest_VoidResponse"
+                  - $ref: "#/components/schemas/Inventory_Manifest_Void_StopResponse"
+                  - $ref: "#/components/schemas/Inventory_Manifest_Void_ItemsResponse"
+                  - $ref: "#/components/schemas/Inventory_Transfer_LookupResponse"
+                  - $ref: "#/components/schemas/Inventory_Transfer_OutboundResponse"
+                  - $ref: "#/components/schemas/Inventory_Transfer_Outbound_Return_LookupResponse"
+                  - $ref: "#/components/schemas/Inventory_Transfer_Outbound_ReturnResponse"
+                  - $ref: "#/components/schemas/Inventory_Transfer_Outbound_ModifyResponse"
+                  - $ref: "#/components/schemas/Inventory_Transfer_Outbound_VoidResponse"
+                  - $ref: "#/components/schemas/Inventory_Transfer_InboundResponse"
+                  - $ref: "#/components/schemas/Inventory_Transfer_Inbound_ModifyResponse"
+                  - $ref: "#/components/schemas/Inventory_Create_LotResponse"
+                  - $ref: "#/components/schemas/Inventory_SplitResponse"
+                  - $ref: "#/components/schemas/Inventory_ConvertResponse"
+                  - $ref: "#/components/schemas/Inventory_SampleResponse"
+                  - $ref: "#/components/schemas/Inventory_Qa_SampleResponse"
+                  - $ref: "#/components/schemas/Inventory_Qa_Sample_VoidResponse"
+                  - $ref: "#/components/schemas/Inventory_Qa_Sample_ResultsResponse"
+                  - $ref: "#/components/schemas/Inventory_Qa_CheckResponse"
+                  - $ref: "#/components/schemas/Inventory_Qa_Check_AllResponse"
+                  - $ref: "#/components/schemas/Inventory_ModifyResponse"
+                  - $ref: "#/components/schemas/Inventory_Convert_UndoResponse"
+                  - $ref: "#/components/schemas/Card_LookupResponse"
+                  - $ref: "#/components/schemas/Sale_DispenseResponse"
+                  - $ref: "#/components/schemas/Sale_VoidResponse"
+                  - $ref: "#/components/schemas/Sale_ModifyResponse"
+                  - $ref: "#/components/schemas/Sale_RefundResponse"
+                  - $ref: "#/components/schemas/Tax_Obligation_FileResponse"
+                  - $ref: "#/components/schemas/Nonce_ReplayResponse"
+                  - $ref: "#/components/schemas/Sync_CheckResponse"
+                  - $ref: "#/components/schemas/Sync_VehicleResponse"
+                  - $ref: "#/components/schemas/Sync_EmployeeResponse"
+                  - $ref: "#/components/schemas/Sync_Plant_RoomResponse"
+                  - $ref: "#/components/schemas/Sync_Inventory_RoomResponse"
+                  - $ref: "#/components/schemas/Sync_Inventory_RoomResponseResponse"
+                  - $ref: "#/components/schemas/Sync_InventoryResponse"
+                  - $ref: "#/components/schemas/Sync_PlantResponse"
+                  - $ref: "#/components/schemas/Sync_Plant_DerivativeResponse"
+                  - $ref: "#/components/schemas/Sync_ManifestResponse"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                - $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    BasicRequest:
+      type: object
+      required:
+        - API
+      properties:
+        API:
+          type: string
+    BasicResponse:
+      type: object
+      properties:
+        success:
+          type: string
+    AuthenticatedRequest:
+      allOf:
+        - $ref: "#/components/schemas/BasicRequest"
+        - type: object
+      required:
+        - sessionId
+      properties:
+        sessionid:
+          type: string
+    LoginRequest:
+      allOf:
+        - $ref: "#/components/schemas/BasicRequest"
+        - type: object
+      required:
+        - password
+        - license_number
+        - username
+      properties:
+        password:
+          type: string
+        license_number:
+          type: string
+        username:
+          type: string
+        training:
+          type: string
+        action:
+          type: string
+          default: "login"
+    LoginResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        admin:
+          type: string
+        sessionid:
+          type: string
+        time:
+          type: string
+    User_AddRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "user_add"
+        new_admin:
+          type: string
+        new_password:
+          type: string
+        new_username:
+          type: string
+        new_permissions:
+          type: object
+          properties:
+            inventory_convert:
+              type: string
+            sale_dispense:
+              type: string
+            sale_modify:
+              type: string
+            sale_void:
+              type: string
+            sale_refund:
+              type: string
+            justauthenticate:
+              type: string
+            employee_add:
+              type: string
+            employee_modify:
+              type: string
+            employee_remove:
+              type: string
+            vehicle_add:
+              type: string
+            vehicle_modify:
+              type: string
+            vehicle_remove:
+              type: string
+            plant_room_add:
+              type: string
+            plant_room_modify:
+              type: string
+            plant_room_remove:
+              type: string
+            inventory_room_add:
+              type: string
+            inventory_room_modify:
+              type: string
+            inventory_room_remove:
+              type: string
+            plant_destroy_schedule:
+              type: string
+            plant_destroy_schedule_undo:
+              type: string
+            plant_destroy:
+              type: string
+            plant_harvest_schedule:
+              type: string
+            plant_harvest_schedule_undo:
+              type: string
+            plant_harvest:
+              type: string
+            plant_new:
+              type: string
+            plant_new_undo:
+              type: string
+            plant_convert_to_inventory:
+              type: string
+            plant_cure:
+              type: string
+            plant_yield_modify:
+              type: string
+            plant_waste_weigh:
+              type: string
+            inventory_new:
+              type: string
+            inventory_manifest_lookup:
+              type: string
+            inventory_transfer_inbound:
+              type: string
+            inventory_transfer_inbound_modify:
+              type: string
+            inventory_transfer_lookup:
+              type: string
+            inventory_transfer_outbound:
+              type: string
+            inventory_transfer_outbound_modify:
+              type: string
+            inventory_transfer_outbound_void:
+              type: string
+            plant_move:
+              type: string
+            plant_modify:
+              type: string
+            inventory_adjust:
+              type: string
+            inventory_adjust_usable:
+              type: string
+            inventory_sample:
+              type: string
+            inventory_qa_check:
+              type: string
+            inventory_qa_check_all:
+              type: string
+            inventory_qa_sample:
+              type: string
+            inventory_qa_sample_void:
+              type: string
+            inventory_qa_sample_results:
+              type: string
+            inventory_manifest_pickup:
+              type: string
+            inventory_manifest_modify:
+              type: string
+            inventory_manifest:
+              type: string
+            inventory_manifest_void:
+              type: string
+            inventory_manifest_void_stop:
+              type: string
+            inventory_manifest_void_items:
+              type: string
+            inventory_create_lot:
+              type: string
+            inventory_split:
+              type: string
+            user_add:
+              type: string
+            user_modify:
+              type: string
+            user_remove:
+              type: string
+            inventory_move:
+              type: string
+            inventory_destroy_schedule:
+              type: string
+            inventory_destroy_schedule_undo:
+              type: string
+            inventory_destroy:
+              type: string
+            tax_obligation_file:
+              type: string
+            nonce_replay:
+              type: string
+            sync_vehicle:
+              type: string
+            sync_employee:
+              type: string
+            sync_plant_room:
+              type: string
+            sync_inventory_room:
+              type: string
+            sync_inventory:
+              type: string
+            sync_plant:
+              type: string
+            sync_plant_derivative:
+              type: string
+            sync_manifest:
+              type: string
+            sync_inventory_transfer:
+              type: string
+            sync_inventory_transfer_inbound:
+              type: string
+            sync_sale:
+              type: string
+            sync_tax_report:
+              type: string
+            sync_vendor:
+              type: string
+            sync_qa_lab:
+              type: string
+            sync_check:
+              type: string
+            sync_inventory_adjust:
+              type: string
+            sync_inventory_qa_sample:
+              type: string
+            sync_inventory_sample:
+              type: string
+            inventory_transfer_outbound_return_lookup:
+              type: string
+            inventory_transfer_outbound_return:
+              type: string
+            inventory_convert_undo:
+              type: string
+            card_lookup:
+              type: string
+    User_AddResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+    User_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "user_modify"
+        new_admin:
+          type: string
+        new_password:
+          type: string
+        new_username:
+          type: string
+        new_permissions:
+          type: object
+          properties:
+            inventory_convert:
+              type: string
+            sale_dispense:
+              type: string
+            sale_modify:
+              type: string
+            sale_void:
+              type: string
+            sale_refund:
+              type: string
+            justauthenticate:
+              type: string
+            employee_add:
+              type: string
+            employee_modify:
+              type: string
+            employee_remove:
+              type: string
+            vehicle_add:
+              type: string
+            vehicle_modify:
+              type: string
+            vehicle_remove:
+              type: string
+            plant_room_add:
+              type: string
+            plant_room_modify:
+              type: string
+            plant_room_remove:
+              type: string
+            inventory_room_add:
+              type: string
+            inventory_room_modify:
+              type: string
+            inventory_room_remove:
+              type: string
+            plant_destroy_schedule:
+              type: string
+            plant_destroy_schedule_undo:
+              type: string
+            plant_destroy:
+              type: string
+            plant_harvest_schedule:
+              type: string
+            plant_harvest_schedule_undo:
+              type: string
+            plant_harvest:
+              type: string
+            plant_new:
+              type: string
+            plant_new_undo:
+              type: string
+            plant_convert_to_inventory:
+              type: string
+            plant_cure:
+              type: string
+            plant_yield_modify:
+              type: string
+            plant_waste_weigh:
+              type: string
+            inventory_new:
+              type: string
+            inventory_manifest_lookup:
+              type: string
+            inventory_transfer_inbound:
+              type: string
+            inventory_transfer_inbound_modify:
+              type: string
+            inventory_transfer_lookup:
+              type: string
+            inventory_transfer_outbound:
+              type: string
+            inventory_transfer_outbound_modify:
+              type: string
+            inventory_transfer_outbound_void:
+              type: string
+            plant_move:
+              type: string
+            plant_modify:
+              type: string
+            inventory_adjust:
+              type: string
+            inventory_adjust_usable:
+              type: string
+            inventory_sample:
+              type: string
+            inventory_qa_check:
+              type: string
+            inventory_qa_check_all:
+              type: string
+            inventory_qa_sample:
+              type: string
+            inventory_qa_sample_void:
+              type: string
+            inventory_qa_sample_results:
+              type: string
+            inventory_manifest_pickup:
+              type: string
+            inventory_manifest_modify:
+              type: string
+            inventory_manifest:
+              type: string
+            inventory_manifest_void:
+              type: string
+            inventory_manifest_void_stop:
+              type: string
+            inventory_manifest_void_items:
+              type: string
+            inventory_create_lot:
+              type: string
+            inventory_split:
+              type: string
+            user_add:
+              type: string
+            user_modify:
+              type: string
+            user_remove:
+              type: string
+            inventory_move:
+              type: string
+            inventory_destroy_schedule:
+              type: string
+            inventory_destroy_schedule_undo:
+              type: string
+            inventory_destroy:
+              type: string
+            tax_obligation_file:
+              type: string
+            nonce_replay:
+              type: string
+            sync_vehicle:
+              type: string
+            sync_employee:
+              type: string
+            sync_plant_room:
+              type: string
+            sync_inventory_room:
+              type: string
+            sync_inventory:
+              type: string
+            sync_plant:
+              type: string
+            sync_plant_derivative:
+              type: string
+            sync_manifest:
+              type: string
+            sync_inventory_transfer:
+              type: string
+            sync_inventory_transfer_inbound:
+              type: string
+            sync_sale:
+              type: string
+            sync_tax_report:
+              type: string
+            sync_vendor:
+              type: string
+            sync_qa_lab:
+              type: string
+            sync_check:
+              type: string
+            sync_inventory_adjust:
+              type: string
+            sync_inventory_qa_sample:
+              type: string
+            sync_inventory_sample:
+              type: string
+            inventory_transfer_outbound_return_lookup:
+              type: string
+            inventory_transfer_outbound_return:
+              type: string
+            inventory_convert_undo:
+              type: string
+            card_lookup:
+              type: string
+    User_ModifyResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+    User_RemoveRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "user_remove"
+        new_username:
+          type: string
+    Employee_AddRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "employee_add"
+        employee name:
+          type: string
+        employee id:
+          type: string
+        birth_month:
+          type: string
+        birth_day:
+          type: string
+        birth_year:
+          type: string
+        hire_month:
+          type: string
+        hire_day:
+          type: string
+        hire_year:
+          type: string
+    Employee_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "employee_modify"
+        employee name:
+          type: string
+        employee id:
+          type: string
+        birth_month:
+          type: string
+        birth_day:
+          type: string
+        birth_year:
+          type: string
+        hire_month:
+          type: string
+        hire_day:
+          type: string
+        hire_year:
+          type: string
+    Employee_RemoveRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "employee_remove"
+        employee_id:
+          type: string
+    Vehicle_AddRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "vehicle_add"
+        vehicle_id:
+          type: string
+        color:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        plate:
+          type: string
+        vin:
+          type: string
+        year:
+          type: string
+    Vehicle_RemoveRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "vehicle_remove"
+        vehicle_id:
+          type: string
+    Plant_Room_AddRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_room_add"
+        name:
+          type: string
+        id:
+          type: string
+        location:
+          type: string
+    Inventory_Room_AddRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_room_add"
+        name:
+          type: string
+        id:
+          type: string
+        quarantine:
+          type: string
+        location:
+          type: string
+    Inventory_Room_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_room_modify"
+        name:
+          type: string
+        id:
+          type: string
+        quarantine:
+          type: string
+        location:
+          type: string
+    Inventory_Room_RemoveRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_room_remove"
+        id:
+          type: string
+    Plant_NewRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_new"
+        location:
+          type: string
+        source:
+          type: string
+        quantity:
+          type: string
+        room:
+          type: string
+        strain:
+          type: string
+        mother:
+           type: string
+    Plant_NewResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        barcodeid:
+          type: string
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Plant_New_UndoRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_new_undo"
+        barcodeid:
+          type: string
+    Plant_New_UndoResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Plant_MoveRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_move"
+        barcodeid:
+          type: string
+    Plant_Destroy_ScheduleRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_destroy_schedule"
+        barcodeid:
+          type: string
+        reason:
+          type: string
+        reason_extended:
+          type: string
+    Plant_Destroy_Schedule_UndoRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_destroy_schedule_undo"
+        barcodeid:
+          type: string
+    Plant_Destroy:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_destroy"
+        barcodeid:
+          type: string
+    Plant_Harvest_ScheduleRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_harvest_schedule"
+        barcodeid:
+          type: string
+    Plant_Harvest_Schedule_UndoRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_harvest_schedule_undo"
+        barcodeid:
+          type: string
+    Plant_HarvestRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_harvest"
+        barcodeid:
+          type: string
+        collectadditional:
+          type: string
+        new_room:
+          type: string
+        weights:
+          type: string
+        derivatives:
+          type: string
+    Plant_Waste_WeighRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_harvest_weigh"
+        location:
+          type: string
+        weight:
+          type: string
+        uom:
+          type: string
+        barcodeid:
+          type: string
+        barcodetype:
+          type: string
+    Plant_CureRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_cure"
+        barcodeid:
+          type: string
+        collectadditional:
+          type: string
+        location:
+          type: string
+        room:
+          type: string
+        weights:
+          type: string
+        derivatives:
+          type: string
+        barcodetype:
+          type: string
+    Plant_Convert_To_InventoryRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_convert_to_inventory"
+        barcodeid:
+          type: string
+    Plant_Yield_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_yield_modify"
+        transactionid:
+          type: string
+        weights:
+          type: string
+        amount:
+          type: string
+        invtype:
+          type: string
+        uom:
+          type: string
+    Plant_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "plant_modify"
+        barcodeid:
+          type: string
+        strain:
+          type: string
+        room:
+          type: string
+        mother:
+          type: string
+    Inventory_AdjustRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_adjust"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              barcodeid:
+                type: string
+              quantity:
+                type: string
+              reason:
+                type: string
+              type:
+                type: string
+    Inventory_AdjustResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_Adjust_UsableRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_adjust_usable"
+        barcodeid:
+          type: string
+        quantity:
+          type: string
+    Inventory_Adjust_UsableResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+        usableweight:
+          type: string
+    Inventory_Destroy_ScheduleRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_destroy_schedule"
+        barcodeid:
+          type: string
+        reason:
+          type: string
+        reason_extended:
+          type: string
+    Inventory_DestroyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_destroy_schedule"
+        barcodeid:
+          type: string
+    Inventory_DestroyResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_MoveRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_move"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              room:
+                type: string
+              barcodeid:
+                type: string
+    Inventory_MoveResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_CheckRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_check"
+        barcodeid:
+          type: array
+          items:
+            type: string
+    Inventory_CheckResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        data:
+          type: object
+          properties:
+            barcode_id:
+              type: string
+            invtype:
+              type: string
+            quantity:
+              type: string
+            usableweight:
+              type: string
+            strain:
+              type: string
+        success:
+          type: string
+    Inventory_NewRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_new"
+        data:
+          type: object
+          properties:
+            invtype:
+              type: string
+            quantity:
+              type: string
+            strain:
+              type: string
+        location:
+          type: string
+    Inventory_NewResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        barcode_id:
+          type: string
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_ManifestRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_manifest"
+        location:
+          type: string
+        stop_overview:
+          type: array
+          items:
+            type: object
+            properties:
+              approximate_departure:
+                type: string
+              approximate_arrival:
+                type: string
+              approximate_route:
+                type: string
+              vendor_license:
+                type: string
+              stop_number:
+                type: string
+              barcodeid:
+                type: array
+                items:
+                  type: string
+          employeeid:
+            type: string
+          employeeid_2:
+            type: string
+          vehicleid_2:
+            type: string
+    Inventory_Manifest_PickupRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_manifest_pickup"
+        employee_dob:
+          type: string
+        employee_id:
+          type: string
+        employee_name:
+          type: string
+        employee_dob_2:
+          type: string
+        employee_id_2:
+          type: string
+        employee_name_2:
+          type: string
+        vehicle_color:
+          type: string
+        vehicle_make:
+          type: string
+        vehicle_model:
+          type: string
+        vehicle_plate:
+          type: string
+        vehicle_vin:
+          type: string
+        vehicle_year:
+          type: string
+        location:
+          type: string
+        stop_overview:
+          type: array
+          items:
+            type: object
+            properties:
+              approximate_departure:
+                type: string
+              approximate_arrival:
+                type: string
+              approximate_route:
+                type: string
+              vendor_license:
+                type: string
+              stop_number:
+                type: string
+              barcodeid:
+                type: array
+                items:
+                  type: string
+    Inventory_Manifest_LookupRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_manifest_lookup"
+        location:
+          type: string
+    Inventory_Manifest_LookupResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        data:
+          type: object
+          properties:
+            item_count:
+              type: string
+            license_number:
+              type: string
+            manifest_id:
+              type: string
+            trade_name:
+              type: string
+            transfer_date:
+              type: string
+        success:
+          type: string
+        sessiontime:
+          type: string
+    Inventory_Manifest_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_manifest_modify"
+        manifest_id:
+          type: string
+        employee_id:
+          type: string
+        employee_id_2:
+          type: string
+    Inventory_Manifest_VoidRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_manifest_void"
+        manifest_id:
+          type: string
+    Inventory_Manifest_Void_StopRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_manifest_void_stop"
+        manifest_id:
+          type: string
+        stop_number:
+          type: string
+    Inventory_Manifest_Void_ItemsRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_manifest_void_items"
+        manifest_id:
+          type: string
+        barcodeid:
+          type: string
+    Inventory_Transfer_LookupRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_transfer_lookup"
+        location:
+          type: string
+        manifest_id:
+          type: string
+    Inventory_Transfer_LookupResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        data:
+          type: object
+          properties:
+            barcodeid:
+              type: string
+            product:
+              type: string
+            quantity:
+              type: string
+            inventorytype:
+              type: string
+            description:
+              type: string
+            is_sample:
+              type: string
+        success:
+          type: string
+        sessiontime:
+          type: string
+    Inventory_Transfer_OutboundRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_transfer_outbound"
+        manifest_id:
+          type: string
+        data:
+          type: object
+          properties:
+            barcodeid:
+              type: string
+            price:
+              type: string
+    Inventory_Transfer_OutboundResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_Transfer_Outbound_Return_LookupRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_transfer_outbound_return_lookup"
+        location:
+          type: string
+    Inventory_Transfer_Outbound_Return_LookupResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              barcodeid:
+                type: string
+              description:
+                type: string
+              inventorytype:
+                type: string
+              licensenumber:
+                type: string
+              manifest_id:
+                type: string
+              price:
+                type: string
+              quantity:
+                type: string
+              recieved:
+                type: string
+              recieved_quantity:
+                type: string
+              stop_number:
+                type: string
+              strain:
+                type: string
+              trade_name:
+                type: string
+              transfer_date:
+                type: string
+              usable_weight:
+                type: string
+              return_available:
+                type: string
+        sessiontime:
+          type: string
+        success:
+          type: string
+    Inventory_Transfer_Outbound_ReturnRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_transfer_outbound_return"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              barcodeid:
+                type: string
+              item_number:
+                type: string
+              manifest_id:
+                type: string
+              price:
+                type: string
+        location:
+          type: string
+    Inventory_Transfer_Outbound_ReturnResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        data: array
+        items:
+          type: object
+          properties:
+            barcode_id:
+              type: string
+            item_number:
+              type: string
+            sub_lot:
+              type: string
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_Transfer_Outbound_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_transfer_outbound_modify"
+        transactionid:
+          type: string
+        barcodeid:
+          type: string
+        price:
+          type: string
+    Inventory_Transfer_Outbound_VoidRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_transfer_outbound_modify_void"
+        transactionid:
+          type: string
+    Inventory_Transfer_InboundRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_transfer_inbound"
+        data:
+          type: object
+          properties:
+            barcodeid:
+              type: string
+            quantity:
+              type: string
+            uom:
+              type: string
+    Inventory_Transfer_InboundResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_Transfer_Inbound_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_transfer_inbound_modify"
+        transactionid:
+          type: string
+        barcodeid:
+          type: string
+        price:
+          type: string
+    Inventory_Create_LotRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_create_lot"
+        lot_quantity:
+          type: string
+        data: array
+        items:
+          type: object
+          properties:
+            barcodeid:
+              type: string
+            remove_quantity:
+              type: string
+    Inventory_Create_LotResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        barcode_id:
+          type: string
+        barcode_type:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_SplitRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_split"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              barcodeid:
+                type: string
+              removequantity:
+                type: string
+    Inventory_SplitResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        barcode_id:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_ConvertRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_convert"
+        data:
+          type: object
+          properties:
+            barcodeid:
+              type: string
+            remove_quantity:
+              type: string
+        waste:
+          type: string
+        derivative_quantity:
+          type: string
+        derivative_inventory_type:
+          type: string
+    Inventory_ConvertResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        derivatives:
+          type: array
+          items:
+            type: object
+            properties:
+              barcode_id:
+                type: string
+              barcode_type:
+                type: string
+    Inventory_SampleRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_sample"
+        barcodeid:
+          type: string
+        quantity:
+          type: string
+        employee_id:
+          type: string
+    Inventory_Qa_SampleRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_qa_sample"
+        barcodeid:
+          type: string
+        quantity:
+          type: string
+        lab_id:
+          type: string
+    Inventory_Qa_Sample_VoidRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_qa_sample_void"
+        transactionid:
+          type: string
+    Inventory_Qa_Sample_ResultsRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_qa_sample_results"
+        sampleid:
+          type: string
+        test:
+          type: object
+          properties:
+            CBD:
+              type: string
+            CBDA:
+              type: string
+            THC:
+              type: string
+            THCA:
+              type: string
+            Total:
+              type: string
+            type:
+              type: string
+        Other:
+          type: string
+        Stems:
+          type: string
+        type:
+          type: string
+        aerobic_bacteria:
+          type: string
+        bile_tolerant:
+          type: string
+        coliforms:
+          type: string
+        e_coli_and_salmonella:
+          type: string
+        yeast_and_mold:
+          type: string
+        residual_solvent:
+          type: string
+        aflatoxin_b1:
+          type: string
+        aflatoxin_b2:
+          type: string
+        aflatoxin_g1:
+          type: string
+        aflatoxin_g2:
+          type: string
+        ochratoxin_a:
+          type: string
+        pesticide_residue:
+          type: string
+    Inventory_Qa_CheckRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_qa_check"
+        sampleid:
+          type: string
+    Inventory_Qa_Check_AllRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_qa_check_all"
+        barcodeid:
+          type: string
+    Inventory_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_modify"
+        barcodeid:
+          type: string
+        strain:
+          type: string
+    Inventory_ModifyResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Inventory_Convert_UndoRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "inventory_convert_undo"
+        barcodeid:
+          type: string
+    Inventory_Convert_UndoResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+        data:
+          type: array
+          items:
+            type: objecy
+            properties:
+              barcodeid:
+                type: string
+              quantity:
+                type: string
+    Card_LookupRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "card_lookup"
+        card_id:
+          type: string
+        caregiver_card_id:
+          type: string
+    Card_LookupResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        card_key:
+          type: string
+        success:
+          type: string
+    Sale_DispenseRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sale_dispense"
+        card_key:
+          type: string
+        card_id:
+          type: string
+        data: array
+        items:
+          type: object
+          properties:
+            barcodeid:
+              type: string
+            quantity:
+              type: string
+            price:
+              type: string
+    Sale_DispenseResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Sale_VoidRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sale_dispense"
+        transactionid:
+          type: string
+    Sale_ModifyRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sale_modify"
+        transactionid:
+          type: string
+        barcodeid:
+          type: string
+        price:
+          type: string
+    Sale_RefundRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sale_refund"
+        transactionid:
+          type: string
+        data: array
+        items:
+          type: object
+          properties:
+            barcodeid:
+              type: string
+            quantity:
+              type: string
+            price:
+              type: string
+    Sale_RefundResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        sessiontime:
+          type: string
+        success:
+          type: string
+        transactionid:
+          type: string
+    Tax_Obligation_FileRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "tax_obligation_file"
+        excise_tax:
+          type: string
+        gross_sales:
+          type: string
+        location:
+          type: string
+        month:
+          type: string
+        verify:
+          type: string
+        year:
+          type: string
+    Nonce_ReplayRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "nonce_replay"
+        nonce:
+          type: string
+    Sync_CheckRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_check"
+        data:
+          type: object
+          properties:
+            table:
+              type: string
+            transaction_start:
+              type: string
+            transaction_end:
+              type: string
+            sum:
+              type: string
+    Sync_VehicleRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_vehicle"
+    Sync_VehicleResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        vehicle:
+          type: array
+          items:
+            type: object
+            properties:
+              color:
+                type: string
+              deleted:
+                type: string
+              make:
+                type: string
+              model:
+                type: string
+              nickname:
+                type: string
+              plate:
+                type: string
+              transactionid:
+                type: string
+              transactionid_original:
+                type: string
+              vehicle_id:
+                type: string
+              vin:
+                type: string
+              year:
+                type: string
+    Sync_EmployeeRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_employee"
+    Sync_EmployeeResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        employee:
+          type: array
+          items:
+            type: object
+            properties:
+              birthday:
+                type: string
+              birthmonth:
+                type: string
+              birthyear:
+                type: string
+              deleted:
+                type: string
+              employee_id:
+                type: string
+              employee_name:
+                type: string
+              hireday:
+                type: string
+              hiremonth:
+                type: string
+              hireyear:
+                type: string
+              transactionid:
+                type: string
+              transactionid_original:
+                type: string
+    Sync_Plant_RoomRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_plant_room"
+    Sync_Plant_RoomResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        employee:
+          type: array
+          items:
+            type: object
+            properties:
+              plant_room:
+                type: object
+              deleted:
+                type: string
+              location:
+                type: string
+              name:
+                type: string
+              roomid:
+                type: string
+              transactionid:
+                type: string
+              transactionid_original:
+                type: string
+    Sync_Inventory_RoomRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_inventory_room"
+    Sync_Inventory_RoomRequestResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        employee:
+          type: array
+          items:
+            type: object
+            properties:
+              inventory_room:
+                type: object
+              deleted:
+                type: string
+              location:
+                type: string
+              name:
+                type: string
+              quarantine:
+                type: string
+              roomid:
+                type: string
+              transactionid:
+                type: string
+              transactionid_original:
+                type: string
+    Sync_InventoryRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_inventory"
+    Sync_InventoryResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        employee:
+          type: array
+          items:
+            type: object
+            properties:
+              inventory:
+                type: object
+              deleted:
+                type: string
+              id:
+                type: string
+              inventorytype:
+                type: string
+              location:
+                type: string
+              plantid:
+                type: string
+              remaining_quantity:
+                type: string
+              sessiontime:
+                type: string
+              strain:
+                type: string
+              transactionid:
+                type: string
+              transactionid_original:
+                type: string
+              usable_weight:
+                type: string
+              wet:
+                type: string
+              net_package:
+                type: string
+    Sync_PlantRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_plant"
+    Sync_PlantResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        plant:
+          type: object
+          properties:
+              converted:
+                type: string
+              deleted:
+                type: string
+              id:
+                type: string
+              harvestscheduled:
+                type: string
+              location:
+                type: string
+              mother:
+                type: string
+              parentid:
+                type: string
+              removescheduled:
+                type: string
+              room:
+                type: string
+              sessiontime:
+                type: string
+              state:
+                type: string
+              transactionid:
+                type: string
+              transactionid_original:
+                type: string
+    Sync_Plant_DerivativeRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_plant_derivative"
+    Sync_Plant_DerivativeResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        plant_derivative:
+          type: object
+          properties:
+            plant_derivative:
+              type: object
+            collectadditional:
+              type: string
+            deleted:
+              type: string
+            inventoryid:
+              type: string
+            inventorytype:
+              type: string
+            location:
+              type: string
+            plantid:
+              type: string
+            room:
+              type: string
+            sessiontime:
+              type: string
+            transactionid:
+              type: string
+            transactionid_original:
+              type: string
+            weight:
+              type: string
+            wholeweight:
+              type: string
+    Sync_ ManifestRequest:
+      allOf:
+        - $ref: "#/components/schemas/AuthenticatedRequest"
+        - type: object
+      properties:
+        action:
+          type: string
+          default: "sync_manifest"
+    Sync_ManifestResponse:
+      allOf:
+        - $ref: "#/components/schemas/BasicResponse"
+        - type: object
+      properties:
+        manifest:
+          type: object
+          properties:
+            completion_date:
+              type: string
+            deleted:
+              type: string
+            fulfilled:
+              type: string
+            location:
+              type: string
+            manifestid:
+              type: string
+            origination_city:
+              type: string
+            origination_license_number:
+              type: string
+            origination_name:
+              type: string
+            origination_phone:
+              type: string
+            origination_state:
+              type: string
+            origination_street:
+              type: string
+            origination_zip:
+              type: string
+            sessiontime:
+              type: string
+            stopcount:
+              type: string
+            total_item_count:
+              type: string
+            transactionid:
+              type: string
+            transactionid_original:
+              type: string
+            transporter_dob:
+              type: string
+            transporter_id:
+              type: string
+            transporter_name:
+              type: string
+            transporter_vehicle_details:
+              type: string
+            transporter_vehicle_identification:
+              type: string
+        manifest_stop_data:
+          type: object
+          properties:
+            arrive_time:
+              type: string
+            city:
+              type: string
+            depart_time:
+              type: string
+            item_count:
+              type: string
+            license_number:
+              type: string
+            location:
+              type: string
+            manifestid:
+              type: string
+            name:
+              type: string
+            phone":
+              type: string
+            sessiontime:
+              type: string
+            state:
+              type: string
+            stopnumber:
+              type: string
+            street:
+              type: string
+            transactionid:
+              type: string
+            transactionid_original:
+              type: string
+            travel_route:
+              type: string
+            zip:
+              type: string
+            deleted:
+              type: string
+        manifest_stop_items:
+          type: object
+          properties:
+            description:
+              type: string
+            inventoryid:
+               type: string
+            location:
+               type: string
+            manifestid:
+               type: string
+            quantity:
+               type: string
+            sessiontime:
+               type: string
+            stopnumber:
+               type: string
+            transactionid:
+               type: string
+            transactionid_original:
+               type: string
+            deleted:
+               type: string
+  Error:
+      type: object
+      properties:
+        success:
+          type: string
+        error:
+          type: string
